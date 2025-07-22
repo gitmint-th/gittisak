@@ -12,65 +12,65 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText tagline="ติดต่อเรา" title="เชื่อมต่อกับเรา!" />
 
   <ContactUs
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    title="ส่งข้อความถึงเราได้เลย!"
+    subtitle="หากต้องการคำตอบอย่างรวดเร็ว แนะนำให้ดูที่ส่วนคำถามที่พบบ่อย (FAQs) คุณอาจพบคำตอบที่ต้องการที่นั่น! หากไม่พบ ทีมสนับสนุนของเรายินดีให้ความช่วยเหลือคุณ"
     inputs={[
       {
         type: 'text',
         name: 'name',
-        label: 'Name',
+        label: 'ชื่อ',
       },
       {
         type: 'email',
         name: 'email',
-        label: 'Email',
+        label: 'อีเมล',
       },
     ]}
     textarea={{
-      label: 'Message',
+      label: 'ข้อความ',
     }}
     disclaimer={{
       label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+        'เมื่อส่งแบบฟอร์มนี้ คุณรับทราบและยอมรับการเก็บข้อมูลส่วนบุคคลของคุณ',
     }}
-    description="Our support team typically responds within 24 business hours."
+    description="ทีมสนับสนุนของเราจะตอบกลับภายใน 24 ชั่วโมงทำการ"
   />
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="We are here to help!"
+    title="เราพร้อมช่วยเหลือคุณ!"
     items={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
+        title: 'การสนับสนุนทั่วไป',
+        description: `พูดคุยกับเราเกี่ยวกับการจัดการบัญชี การนำทางเว็บไซต์ ปัญหาการชำระเงิน การเข้าถึงเทมเพลตที่ซื้อ หรือคำถามทั่วไปเกี่ยวกับการใช้งานเว็บไซต์`,
       },
       {
-        title: 'Contact sales',
+        title: 'ติดต่อฝ่ายขาย',
         description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
+          'พูดคุยกับเราเกี่ยวกับการซื้อเทมเพลต ตัวเลือกการปรับแต่ง การขอใบอนุญาตสำหรับการใช้งานเชิงพาณิชย์ หรือสอบถามเกี่ยวกับเทมเพลตเฉพาะ',
       },
       {
-        title: 'Technical support',
+        title: 'การสนับสนุนด้านเทคนิค',
         description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
+          'พูดคุยกับเราเมื่อพบปัญหาในการติดตั้งเทมเพลต ปัญหาในการแก้ไข ความเข้ากันได้กับซอฟต์แวร์ หรือข้อผิดพลาดในการดาวน์โหลด รวมถึงปัญหาทางเทคนิคอื่น ๆ ที่เกี่ยวข้องกับการใช้งานเทมเพลต',
       },
       {
-        title: 'Phone',
+        title: 'โทรศัพท์',
         description: '+1 (234) 567-890',
         icon: 'tabler:headset',
       },
       {
-        title: 'Email',
+        title: 'อีเมล',
         description: 'contact@support.com',
         icon: 'tabler:mail',
       },
       {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
+        title: 'ที่อยู่',
+        description: '1234 Lorem Ipsum St, 12345, Miami, สหรัฐอเมริกา',
         icon: 'tabler:map-pin',
       },
     ]}

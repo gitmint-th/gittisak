@@ -4,71 +4,81 @@ import merge from 'lodash.merge';
 
 import type { MetaData } from '~/types';
 
+// กำหนดโครงสร้างข้อมูลสำหรับการตั้งค่าเว็บไซต์
 export interface SiteConfig {
-  name: string;
-  site?: string;
-  base?: string;
-  trailingSlash?: boolean;
-  googleSiteVerificationId?: string;
+  name: string; // ชื่อเว็บไซต์
+  site?: string; // URL เว็บไซต์
+  base?: string; // base path
+  trailingSlash?: boolean; // กำหนดการใส่ / ท้าย URL
+  googleSiteVerificationId?: string; // รหัสยืนยันเว็บไซต์ของ Google
 }
+
+// กำหนดโครงสร้างข้อมูลสำหรับ metadata
 export interface MetaDataConfig extends Omit<MetaData, 'title'> {
   title?: {
-    default: string;
-    template: string;
+    default: string; // ชื่อเริ่มต้น
+    template: string; // รูปแบบชื่อ
   };
 }
+
+// กำหนดโครงสร้างข้อมูลสำหรับภาษา
 export interface I18NConfig {
-  language: string;
-  textDirection: string;
-  dateFormatter?: Intl.DateTimeFormat;
+  language: string; // ภาษา
+  textDirection: string; // ทิศทางข้อความ
+  dateFormatter?: Intl.DateTimeFormat; // ตัวจัดรูปแบบวันที่
 }
+
+// กำหนดโครงสร้างข้อมูลสำหรับบล็อก
 export interface AppBlogConfig {
-  isEnabled: boolean;
-  postsPerPage: number;
-  isRelatedPostsEnabled: boolean;
-  relatedPostsCount: number;
+  isEnabled: boolean; // เปิดใช้งานบล็อกหรือไม่
+  postsPerPage: number; // จำนวนโพสต์ต่อหน้า
+  isRelatedPostsEnabled: boolean; // เปิดใช้งานโพสต์ที่เกี่ยวข้องหรือไม่
+  relatedPostsCount: number; // จำนวนโพสต์ที่เกี่ยวข้อง
   post: {
-    isEnabled: boolean;
-    permalink: string;
+    isEnabled: boolean; // เปิดใช้งานโพสต์หรือไม่
+    permalink: string; // โครงสร้างลิงก์ของโพสต์
     robots: {
-      index: boolean;
-      follow: boolean;
+      index: boolean; // ให้ index หรือไม่
+      follow: boolean; // ให้ follow หรือไม่
     };
   };
   list: {
-    isEnabled: boolean;
-    pathname: string;
+    isEnabled: boolean; // เปิดใช้งานรายการโพสต์หรือไม่
+    pathname: string; // path ของรายการ
     robots: {
       index: boolean;
       follow: boolean;
     };
   };
   category: {
-    isEnabled: boolean;
-    pathname: string;
+    isEnabled: boolean; // เปิดใช้งานหมวดหมู่หรือไม่
+    pathname: string; // path ของหมวดหมู่
     robots: {
       index: boolean;
       follow: boolean;
     };
   };
   tag: {
-    isEnabled: boolean;
-    pathname: string;
+    isEnabled: boolean; // เปิดใช้งานแท็กหรือไม่
+    pathname: string; // path ของแท็ก
     robots: {
       index: boolean;
       follow: boolean;
     };
   };
 }
+
+// กำหนดโครงสร้างข้อมูลสำหรับ Analytics
 export interface AnalyticsConfig {
   vendors: {
     googleAnalytics: {
-      id?: string;
-      partytown?: boolean;
+      id?: string; // รหัส Google Analytics
+      partytown?: boolean; // ใช้งาน partytown หรือไม่
     };
   };
 }
 
+// โหลดไฟล์ config.yaml และแปลงเป็น object
 const config = yaml.load(fs.readFileSync('src/config.yaml', 'utf8')) as {
   site?: SiteConfig;
   metadata?: MetaDataConfig;
@@ -82,19 +92,20 @@ const config = yaml.load(fs.readFileSync('src/config.yaml', 'utf8')) as {
 
 const DEFAULT_SITE_NAME = 'Website';
 
+// ฟังก์ชันสำหรับดึงข้อมูลการตั้งค่าเว็บไซต์
 const getSite = () => {
   const _default = {
     name: DEFAULT_SITE_NAME,
     site: undefined,
     base: '/',
     trailingSlash: false,
-
     googleSiteVerificationId: '',
   };
 
   return merge({}, _default, config?.site ?? {}) as SiteConfig;
 };
 
+// ฟังก์ชันสำหรับดึงข้อมูล metadata
 const getMetadata = () => {
   const siteConfig = getSite();
 
@@ -116,6 +127,7 @@ const getMetadata = () => {
   return merge({}, _default, config?.metadata ?? {}) as MetaDataConfig;
 };
 
+// ฟังก์ชันสำหรับดึงข้อมูลภาษา
 const getI18N = () => {
   const _default = {
     language: 'en',
@@ -134,6 +146,7 @@ const getI18N = () => {
   }) as I18NConfig;
 };
 
+// ฟังก์ชันสำหรับดึงข้อมูลบล็อก
 const getAppBlog = () => {
   const _default = {
     isEnabled: false,
@@ -177,6 +190,7 @@ const getAppBlog = () => {
   return merge({}, _default, config?.apps?.blog ?? {}) as AppBlogConfig;
 };
 
+// ฟังก์ชันสำหรับดึงข้อมูล UI
 const getUI = () => {
   const _default = {
     theme: 'system',
@@ -187,6 +201,7 @@ const getUI = () => {
   return merge({}, _default, config?.ui ?? {});
 };
 
+// ฟังก์ชันสำหรับดึงข้อมูล Analytics
 const getAnalytics = () => {
   const _default = {
     vendors: {
@@ -200,6 +215,7 @@ const getAnalytics = () => {
   return merge({}, _default, config?.analytics ?? {}) as AnalyticsConfig;
 };
 
+// ส่งออกค่าการตั้งค่าต่าง ๆ
 export const SITE = getSite();
 export const I18N = getI18N();
 export const METADATA = getMetadata();
